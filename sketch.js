@@ -1,7 +1,6 @@
-
-//Declare a variável para PLAY e END
-//inicialize o valor para a variável
-//Atribua o valor de gameState como PLAY
+var PLAY = 0
+var END = 1
+var gameState = PLAY
 
 var bow , arrow,  background, redB, pinkB, greenB ,blueB ,arrowGroup;
 var bowImage, arrowImage, green_balloonImage, red_balloonImage, pink_balloonImage ,blue_balloonImage, backgroundImage;
@@ -45,21 +44,19 @@ function setup() {
 
 function draw() {
  background(0);
-//Adicione a condição para gameState = PLAY
-  // solo em movimento
+
+  if (gameState === PLAY) {
     scene.velocityX = -3 
 
     if (scene.x < 0){
       scene.x = scene.width/2;
     }
   
-  //arco em movimento
   bow.y = World.mouseY
   
    // soltar arco quando a tecla espaço for pressionada
   if (keyDown("space")) {
     createArrow();
-    
   }
   
   //criando inimigos continuamente
@@ -78,6 +75,7 @@ function draw() {
       default:break;
     }
   }
+  
 
   if (arrowGroup.isTouching(redB)) {
     redB.destroyEach();
@@ -86,9 +84,11 @@ function draw() {
 
 
 }
- //escreva uma condição para o estado END
- //Adicione o código para destruir o arco
- //defina a velocidade do fundo como 0
+  }
+if (gameState === END) {
+  bow.destroy();
+  scene.velocityX = 0
+}
  
 
 
@@ -98,7 +98,7 @@ function draw() {
  
   
   drawSprites();
-//Adicione a condição de texto para exibir a pontuação.
+text ('pontuação' + score, 300, 50)
 }
 
 
